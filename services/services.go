@@ -1,11 +1,11 @@
 package services
 
 import (
+	"encoding/json"
 	"errors"
 	"fmt"
 
 	"github.com/hyperledger/fabric/core/chaincode/shim"
-	"encoding/json"
 	"github.com/rxshield/data"
 )
 
@@ -28,9 +28,11 @@ func ProcessNewPatient(args []string, stub shim.ChaincodeStubInterface) ([]byte,
 		return nil, err
 	}
 
-	//err := stub.PutState("PatientID", []byte(patientID))
-	err = stub.PutState("PatientID", bytes)
-
+	err = stub.PutState(patientID, bytes)
+	if err != nil {
+		fmt.Println("Could not store data in the ledger ", err)
+		return nil, err
+	}
 	fmt.Println("services.ProcessNewPatient end ")
 
 	return nil, nil

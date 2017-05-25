@@ -27,7 +27,7 @@ func (self *PatientProcessingChainCode) Init(stub shim.ChaincodeStubInterface, f
 		fmt.Println("Initialization of patient contract complete")
 		return patientBytes, nil
 	}
-	err := stub.PutState("PatientID", []byte(args[0]))
+	err := stub.PutState("RX1000", []byte(args[0]))
 	if err != nil {
 		return nil, err
 	}
@@ -80,5 +80,6 @@ func main() {
 	if err != nil {
 		fmt.Printf("Error starting RXSHield chaincode: %s", err)
 	}
+
 }
 

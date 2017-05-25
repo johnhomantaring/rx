@@ -45,7 +45,7 @@ func CreateItem(itemJSON string, stub shim.ChaincodeStubInterface) ([]byte, erro
 func InitializePatientContract(args []string, stub shim.ChaincodeStubInterface) ([]byte, error) {
 	fmt.Println("In initialize.InitializePatientContract start ")
 	//1. Create Customer
-	patientJSON := `{"PatientID":"PRX1000", "FirstName":"Maria","LastName":"Clara","Address":"Quezon City","Age":"34"}`
+	patientJSON := `{"PatientID":"PRX1000", "FirstName":"Maria","LastName":"Clara","Address":"Quezon City","Age":"34", "Weight":"50 kgs"}`
 	CreatePatient(patientJSON, stub)
 
 	//3. Create Item Number
