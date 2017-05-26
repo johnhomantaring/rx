@@ -35,8 +35,7 @@ func (self *PatientProcessingChainCode) Init(stub shim.ChaincodeStubInterface, f
 	return nil, nil
 }
 
-func (self *PatientProcessingChainCode) Invoke(stub shim.ChaincodeStubInterface,
-	function string, args []string) ([]byte, error) {
+func (self *PatientProcessingChainCode) Invoke(stub shim.ChaincodeStubInterface, function string, args []string) ([]byte, error) {
 	fmt.Println("In Invoke with function  " + function)
 
 	if function == "processNewPatient" {
