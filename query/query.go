@@ -6,10 +6,10 @@ import (
 	"fmt"
 
 	"github.com/hyperledger/fabric/core/chaincode/shim"
-	"github.com/rxshield/data"
+	"github.com/johnhomantaring/rxshield/data"
 )
 
-func Query(stub shim.ChaincodeStub, function string, args []string) ([]byte, error) {
+func Query(stub shim.ChaincodeStubInterface, function string, args []string) ([]byte, error) {
 
 	fmt.Printf("In query.Query  function %v with args %v  \n", function, args)
 
@@ -29,7 +29,7 @@ func Query(stub shim.ChaincodeStub, function string, args []string) ([]byte, err
 	return nil, errors.New("Received unknown query function name")
 }
 
-func GetPatientDetails(PatientID string, stub shim.ChaincodeStub) (data.PatientInfo, error) {
+func GetPatientDetails(PatientID string, stub shim.ChaincodeStubInterface) (data.PatientInfo, error) {
 	fmt.Println("In query.GetPatientDetails start ")
 	var patient data.PatientInfo
 	patientBytes, err := stub.GetState(PatientID)
