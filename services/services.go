@@ -9,7 +9,7 @@ import (
 	"github.com/rxshield/data"
 )
 
-func ProcessNewPatient(args []string, stub shim.ChaincodeStub) ([]byte, error) {
+func ProcessNewPatient(args []string, stub shim.ChaincodeStubInterface) ([]byte, error) {
 	fmt.Println("In services.ProcessPatient start ")
 	patientID := args[0]
 	firstName := args[1]
