@@ -6,18 +6,18 @@ import (
 
 	"github.com/hyperledger/fabric/core/chaincode/shim"
 	"github.com/johnhomantaring/rxshield/query"
+	"github.com/johnhomantaring/rxshield/services"
 
 )
 
 type PatientProcessingChainCode struct {
 }
 
-func (t *PatientProcessingChainCode) Init(stub shim.ChaincodeStubInterface, function string, args []string) ([]byte, error) {
+func (self *PatientProcessingChainCode) Init(stub shim.ChaincodeStubInterface, function string, args []string) ([]byte, error) {
 	fmt.Println("In Init start ")
 	if len(args) != 1 {
 		return nil, errors.New("Incorrect number of arguments. Expecting 1")
 	}
-/*
 	if function == "initializePatientContract" {
 		patientBytes, err := services.InitializePatientContract(args, stub)
 		if err != nil {
@@ -35,9 +35,9 @@ func (t *PatientProcessingChainCode) Init(stub shim.ChaincodeStubInterface, func
 	return nil, nil
 }
 
-func (t *PatientProcessingChainCode) Invoke(stub shim.ChaincodeStubInterface, function string, args []string) ([]byte, error) {
+func (self *PatientProcessingChainCode) Invoke(stub shim.ChaincodeStubInterface, function string, args []string) ([]byte, error) {
 	fmt.Println("In Invoke with function  " + function)
-/*
+	
 	if function == "processNewPatient" {
 		fmt.Println("invoking processNewPatient " + function)
 		bytes, err := services.ProcessNewPatient(args, stub)
@@ -59,20 +59,19 @@ func (t *PatientProcessingChainCode) Invoke(stub shim.ChaincodeStubInterface, fu
 		fmt.Println("Old Patient Update successfully. ")
 		return bytes, nil
 	}
-*/
+
 	fmt.Println("invoke did not find func: " + function)
 	return nil, errors.New("Received unknown function invocation: " + function)
 }
 
-func (t *PatientProcessingChainCode) Query(stub shim.ChaincodeStubInterface, function string, args []string) ([]byte, error) {
+func (self *PatientProcessingChainCode) Query(stub shim.ChaincodeStubInterface, function string, args []string) ([]byte, error) {
 	fmt.Println("In Query with function " + function)
-/*	bytes, err := query.Query(stub, function, args)
+	bytes, err := query.Query(stub, function, args)
 	if err != nil {
 		fmt.Println("Error retrieving function  ")
 		return nil, err
 	}
-	return bytes, nil*/
-	return nil, errors.New("Received unknown function invocation: " + function)
+	return bytes, nil
 }
 
 func main() {
