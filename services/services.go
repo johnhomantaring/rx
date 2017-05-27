@@ -6,7 +6,7 @@ import (
 	"fmt"
 
 	"github.com/hyperledger/fabric/core/chaincode/shim"
-	"github.com/rxshield/data"
+	"github.com/johnhomantaring/rxshield/data"
 )
 
 func ProcessNewPatient(args []string, stub shim.ChaincodeStubInterface) ([]byte, error) {
