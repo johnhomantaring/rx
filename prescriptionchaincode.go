@@ -70,7 +70,7 @@ func (t *PatientProcessingChainCode) Query(stub shim.ChaincodeStubInterface, fun
 		return nil, err
 	}
 	return bytes, nil*/
-	return nil
+	return nil, errors.New("Received unknown function invocation: " + function)
 }
 
 func main() {
