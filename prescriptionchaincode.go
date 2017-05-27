@@ -64,12 +64,13 @@ func (t *PatientProcessingChainCode) Invoke(stub shim.ChaincodeStub, function st
 
 func (t *PatientProcessingChainCode) Query(stub shim.ChaincodeStub, function string, args []string) ([]byte, error) {
 	fmt.Println("In Query with function " + function)
-//	bytes, err := query.Query(stub, function, args)
+/*	bytes, err := query.Query(stub, function, args)
 	if err != nil {
 		fmt.Println("Error retrieving function  ")
 		return nil, err
 	}
-	return bytes, nil
+	return bytes, nil*/
+	return nil
 }
 
 func main() {
