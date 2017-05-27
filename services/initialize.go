@@ -8,7 +8,7 @@ import (
 	"github.com/rxshield/data"
 )
 
-func CreatePatient(patientJSON string, stub shim.ChaincodeStubInterface) ([]byte, error) {
+func CreatePatient(patientJSON string, stub shim.ChaincodeStub) ([]byte, error) {
 	fmt.Println("In initialize.CreatePatient start ")
 	var patient data.PatientInfo
 	err := json.Unmarshal([]byte(patientJSON), &patient)
@@ -25,7 +25,7 @@ func CreatePatient(patientJSON string, stub shim.ChaincodeStubInterface) ([]byte
 	return nil, nil
 }
 
-func CreateItem(itemJSON string, stub shim.ChaincodeStubInterface) ([]byte, error) {
+func CreateItem(itemJSON string, stub shim.ChaincodeStub) ([]byte, error) {
 	fmt.Println("In initialize.CreateItem start ")
 	var patient data.PatientInfo
 	err := json.Unmarshal([]byte(itemJSON), &patient)
@@ -42,7 +42,7 @@ func CreateItem(itemJSON string, stub shim.ChaincodeStubInterface) ([]byte, erro
 	return nil, nil
 }
 
-func InitializePatientContract(args []string, stub shim.ChaincodeStubInterface) ([]byte, error) {
+func InitializePatientContract(args []string, stub shim.ChaincodeStub) ([]byte, error) {
 	fmt.Println("In initialize.InitializePatientContract start ")
 	//1. Create Customer
 	patientJSON := `{"PatientID":"PRX1000", "FirstName":"Maria","LastName":"Clara","Address":"Quezon City","Age":"34", "Weight":"50 kgs"}`
