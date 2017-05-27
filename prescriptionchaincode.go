@@ -5,6 +5,8 @@ import (
 	"fmt"
 
 	"github.com/hyperledger/fabric/core/chaincode/shim"
+	"github.com/johnhomantaring/rxshield/query"
+
 )
 
 type PatientProcessingChainCode struct {
