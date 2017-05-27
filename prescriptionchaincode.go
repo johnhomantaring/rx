@@ -10,7 +10,7 @@ import (
 type PatientProcessingChainCode struct {
 }
 
-func (t *PatientProcessingChainCode) Init(stub shim.ChaincodeStub, function string, args []string) ([]byte, error) {
+func (t *PatientProcessingChainCode) Init(stub shim.ChaincodeStubInterface, function string, args []string) ([]byte, error) {
 	fmt.Println("In Init start ")
 	if len(args) != 1 {
 		return nil, errors.New("Incorrect number of arguments. Expecting 1")
@@ -33,7 +33,7 @@ func (t *PatientProcessingChainCode) Init(stub shim.ChaincodeStub, function stri
 	return nil, nil
 }
 
-func (t *PatientProcessingChainCode) Invoke(stub shim.ChaincodeStub, function string, args []string) ([]byte, error) {
+func (t *PatientProcessingChainCode) Invoke(stub shim.ChaincodeStubInterface, function string, args []string) ([]byte, error) {
 	fmt.Println("In Invoke with function  " + function)
 /*
 	if function == "processNewPatient" {
@@ -62,7 +62,7 @@ func (t *PatientProcessingChainCode) Invoke(stub shim.ChaincodeStub, function st
 	return nil, errors.New("Received unknown function invocation: " + function)
 }
 
-func (t *PatientProcessingChainCode) Query(stub shim.ChaincodeStub, function string, args []string) ([]byte, error) {
+func (t *PatientProcessingChainCode) Query(stub shim.ChaincodeStubInterface, function string, args []string) ([]byte, error) {
 	fmt.Println("In Query with function " + function)
 /*	bytes, err := query.Query(stub, function, args)
 	if err != nil {
