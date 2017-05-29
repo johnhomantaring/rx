@@ -26,7 +26,7 @@ type Item struct {
 type Transaction struct {
 	TransactionID   string `json:"TransactionID"`
 	PatientID       string `json:"PatientID"`
-	ItemRefID       string `json:"ItemRefID"`
+	ItemRefID       int `json:"ItemRefID"`
 	Participant     string `json:"Participant"`
 	TransactionDate string `json:"TranDate"`
 	TxnUpdatedDate  string `json:"TxnUpdatedDate"`

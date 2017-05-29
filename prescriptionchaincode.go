@@ -58,9 +58,20 @@ func (self *PatientProcessingChainCode) Invoke(stub shim.ChaincodeStubInterface,
 		fmt.Println("Items Update successfully ")
 		return bytes, nil
 	}
-
+	
+	if function == "processUpdateItems" {
+		fmt.Println("invoking processUpdateItems" + function)
+		bytes, err := services.ProcessUpdateItems(args, stub)
+		if err != nil {
+			fmt.Println("Error performing processUpdateItems function ")
+			return nil, err
+		}
+		fmt.Println("Item Update successfully ")
+		return bytes, nil
+	}
+/*
 	if function == "processTransaction" {
-		fmt.Println("invoking ProcessTransaction" + function)
+		fmt.Println("invoking processTransaction" + function)
 		bytes, err := services.ProcessTransaction(args, stub)
 		if err != nil {
 			fmt.Println("Error performing processTransaction function ")
@@ -69,7 +80,7 @@ func (self *PatientProcessingChainCode) Invoke(stub shim.ChaincodeStubInterface,
 		fmt.Println("Transaction Update successfully ")
 		return bytes, nil
 	}
-
+*/
 	fmt.Println("invoke did not find func: " + function)
 	return nil, errors.New("Received unknown function invocation: " + function)
 }
