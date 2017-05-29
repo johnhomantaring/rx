@@ -9,16 +9,9 @@ type PatientInfo struct {
 	Weight    string `json:"Weight"`
 }
 
-type ContractDefinition struct {
-	ContractID      string  `json:"ContractID"`
-	ContractEndDate string  `json:"ContractEndDate"`
-	ContractType    string  `json:"ContractType"`
-	QuantityLimit   float64 `json:"QuantityLimit"`
-}
-
 type Item struct {
 	PatientID   string `json:"PatientID"`
-	ItemRefID   string `json:"ItemRefID"`
+	ItemRefID   int    `json:"ItemRefID"`
 	Medicine    string `json:"Medicine"`
 	Dosage      string `json:"Dosage"`
 	Quantity    int    `json:"Quantity"`
@@ -35,7 +28,7 @@ type Transaction struct {
 	PatientID       string `json:"PatientID"`
 	ItemRefID       string `json:"ItemRefID"`
 	Participant     string `json:"Participant"`
-	TransactionDate string	  `json:"TranDate"`
-	TxnUpdatedDate  string	  `json:"TxnUpdatedDate"`
+	TransactionDate string `json:"TranDate"`
+	TxnUpdatedDate  string `json:"TxnUpdatedDate"`
 }
 

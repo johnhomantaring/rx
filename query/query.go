@@ -61,6 +61,18 @@ func Query(stub shim.ChaincodeStubInterface, function string, args []string) ([]
 			return json.Marshal(item)
 		}
 	*/
+	if function == "getLatestItemRef" {
+		fmt.Println("Invoking getLatestItemRef" + function)
+		var transaction data.Item
+		transaction, err := GetLatestItemRef(args[0], stub)
+		if err != nil {
+			fmt.Println("Error receiving the Items")
+			return nil, errors.New("Error receiving the Item details")
+		}
+		fmt.Println("All success, returning the Item details")
+		return json.Marshal(transaction)
+	}
+
 	if function == "getLastTransaction" {
 		fmt.Println("Invoking getLastTransaction" + function)
 		var transaction data.Item
@@ -73,6 +85,20 @@ func Query(stub shim.ChaincodeStubInterface, function string, args []string) ([]
 		return json.Marshal(transaction)
 	}
 	return nil, errors.New("Received unknown query function name")
+}
+
+func GetLatestItemRef(ItemRef string, stub shim.ChaincodeStubInterface) (data.Item, error) {
+	fmt.Println("In query.GetLastItemRef start ")
+	var latestitem data.Item
+	bytes, err := stub.GetState(ItemRef)
+	if err != nil {
+		fmt.Println("Error retrieving Latest Item Ref ID ")
+		return latestitem, errors.New("Error retrieving Latest Item Ref ID ")
+	}
+	err = json.Unmarshal(bytes, &latestitem)
+	fmt.Println("Latest Item   : ", latestitem)
+	fmt.Println("In query.GetLastItemRef end ", latestitem.ItemRefID)
+	return latestitem, nil
 }
 
 func GetPatientDetails(PatientID string, stub shim.ChaincodeStubInterface) (data.PatientInfo, error) {
@@ -91,15 +117,24 @@ func GetPatientDetails(PatientID string, stub shim.ChaincodeStubInterface) (data
 
 func GetItems(PatientID string, stub shim.ChaincodeStubInterface) (data.Item, error) {
 	fmt.Println("In query.GetPatientDetails start ")
+	//const peerSize = 4
+	//var stubs [peerSize]*shim.CustomMockStub
+
 	var item data.Item
-	itemBytes, err := stub.GetState(PatientID)
+	//for x := 0; x < 5; x++ {
+		Bytes, err := stub.GetState(PatientID)
+	//	itemBytes := string(Bytes)
+	//}
 	if err != nil {
 		fmt.Println("Error retrieving Item Details " + PatientID)
 		return item, errors.New("Error retrieving Item Details " + PatientID)
 	}
-	err = json.Unmarshal(itemBytes, &item)
-	fmt.Println("Item   : ", item)
-	fmt.Println("In query.GetItems end ")
+	err = json.Unmarshal(Bytes, &item)
+	fmt.Println("Item   : ", Bytes)
+	fmt.Println("In query.GetItems end ", item.ItemRefID)
+	/*while (item.ItemRefID != "") {
+		return item, nil
+	}*/
 	return item, nil
 }
 
