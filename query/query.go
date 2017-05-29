@@ -24,8 +24,54 @@ func Query(stub shim.ChaincodeStubInterface, function string, args []string) ([]
 		fmt.Println("All success, returning the Patient details")
 		return json.Marshal(patient)
 	}
+	if function == "getItems" {
+		fmt.Println("Invoking getItems " + function)
+		var item data.Item
+		item, err := GetItems(args[0], stub)
+		if err != nil {
+			fmt.Println("Error receiving  the Items")
+			return nil, errors.New("Error receiving the Item details")
+		}
+		fmt.Println("All success, returning the Item details")
+		return json.Marshal(item)
+	}
 
-	//
+	if function == "getTrans" {
+		fmt.Println("Invoking getTrans " + function)
+		var trans data.Transaction
+		trans, err := GetTrans(args[0], stub)
+		if err != nil {
+			fmt.Println("Error receiving  the Transaction")
+			return nil, errors.New("Error receiving the Transaction details")
+		}
+		fmt.Println("All success, returning the Transaction details")
+		return json.Marshal(trans)
+	}
+	/*
+		if function == "getItems" {
+			fmt.Println("Invoking getItems " + function)
+			var item []string
+			item, err := GetItems(args[0], stub)
+			if err != nil {
+				fmt.Println("Error receiving Items")
+				return nil, errors.New("Error receiving the Items")
+			}
+			fmt.Println("All success, returning the Item details")
+			itemDetails :=
+			return json.Marshal(item)
+		}
+	*/
+	if function == "getLastTransaction" {
+		fmt.Println("Invoking getLastTransaction" + function)
+		var transaction data.Item
+		transaction, err := GetLastTrans(args[0], args[1], stub)
+		if err != nil {
+			fmt.Println("Error receiving the Items")
+			return nil, errors.New("Error receiving the Item details")
+		}
+		fmt.Println("All success, returning the Item details")
+		return json.Marshal(transaction)
+	}
 	return nil, errors.New("Received unknown query function name")
 }
 
@@ -41,5 +87,47 @@ func GetPatientDetails(PatientID string, stub shim.ChaincodeStubInterface) (data
 	fmt.Println("Patient   : ", patient)
 	fmt.Println("In query.GetPatientDetails end ")
 	return patient, nil
+}
+
+func GetItems(PatientID string, stub shim.ChaincodeStubInterface) (data.Item, error) {
+	fmt.Println("In query.GetPatientDetails start ")
+	var item data.Item
+	itemBytes, err := stub.GetState(PatientID)
+	if err != nil {
+		fmt.Println("Error retrieving Item Details " + PatientID)
+		return item, errors.New("Error retrieving Item Details " + PatientID)
+	}
+	err = json.Unmarshal(itemBytes, &item)
+	fmt.Println("Item   : ", item)
+	fmt.Println("In query.GetItems end ")
+	return item, nil
+}
+
+func GetTrans(TransactionID string, stub shim.ChaincodeStubInterface) (data.Transaction, error) {
+	fmt.Println("In query.GetTrans start ")
+	var trans data.Transaction
+	itemBytes, err := stub.GetState(TransactionID)
+	if err != nil {
+		fmt.Println("Error retrieving Transaction " + TransactionID)
+		return trans, errors.New("Error retrieving Transaction " + TransactionID)
+	}
+	err = json.Unmarshal(itemBytes, &trans)
+	fmt.Println("Item   : ", trans)
+	fmt.Println("In query.GetTrans end ")
+	return trans, nil
+}
+
+func GetLastTrans(PatientID string, ItemRefID string, stub shim.ChaincodeStubInterface) (data.Item, error) {
+	fmt.Println("In query.GetLastTrans start ")
+	var item data.Item
+	itemBytes, err := stub.GetState(PatientID)
+	if err != nil {
+		fmt.Println("Error retrieving Item Details " + PatientID)
+		return item, errors.New("Error retrieving Item Details " + PatientID)
+	}
+	err = json.Unmarshal(itemBytes, &item)
+	fmt.Println("Item   : ", item)
+	fmt.Println("In query.GetLastTrans end ")
+	return item, nil
 }
 

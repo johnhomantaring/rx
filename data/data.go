@@ -1,9 +1,5 @@
 package data
 
-import (
-	"time"
-)
-
 type PatientInfo struct {
 	PatientID string `json:"PatientID"`
 	FirstName string `json:"FirstName"`
@@ -21,22 +17,25 @@ type ContractDefinition struct {
 }
 
 type Item struct {
-	PatientID   string    `json:"PatientID"`
-	ItemRefID   string    `json:"ItemRefID"`
-	Medicine    string    `json:"Medicine"`
-	Dosage      string    `json:"Dosage"`
-	Quantity    string    `json:"Quantity"`
-	RemQuantity float64   `json:"RemQuantity"`
-	DateValid   time.Time `json:"DateValid"`
-	Status      string    `json:"Status"`
+	PatientID   string `json:"PatientID"`
+	ItemRefID   string `json:"ItemRefID"`
+	Medicine    string `json:"Medicine"`
+	Dosage      string `json:"Dosage"`
+	Quantity    int    `json:"Quantity"`
+	RemQuantity int    `json:"RemQuantity"`
+	Frequency   string `json:"Frequency"`
+	AddInst     string `json:"AddInst"`
+	Refill      string `json:"Refill"`
+	DateValid   string `json:"DateValid"`
+	Status      string `json:"Status"`
 }
 
 type Transaction struct {
-	TransactionID   string    `json:"TransactionID"`
-	PatientID       string    `json:"PatientID"`
-	ItemRefID       string    `json:"ItemRefID"`
-	Participant     string    `json:"Participant"`
-	TransactionDate time.Time `json:"TranDate"`
-	TxnUpdatedDate  time.Time `json:"TxnUpdatedDate"`
+	TransactionID   string `json:"TransactionID"`
+	PatientID       string `json:"PatientID"`
+	ItemRefID       string `json:"ItemRefID"`
+	Participant     string `json:"Participant"`
+	TransactionDate string	  `json:"TranDate"`
+	TxnUpdatedDate  string	  `json:"TxnUpdatedDate"`
 }
 

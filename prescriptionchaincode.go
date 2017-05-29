@@ -7,7 +7,6 @@ import (
 	"github.com/hyperledger/fabric/core/chaincode/shim"
 	"github.com/johnhomantaring/rxshield/query"
 	"github.com/johnhomantaring/rxshield/services"
-
 )
 
 type PatientProcessingChainCode struct {
@@ -37,7 +36,7 @@ func (self *PatientProcessingChainCode) Init(stub shim.ChaincodeStubInterface, f
 
 func (self *PatientProcessingChainCode) Invoke(stub shim.ChaincodeStubInterface, function string, args []string) ([]byte, error) {
 	fmt.Println("In Invoke with function  " + function)
-	
+
 	if function == "processNewPatient" {
 		fmt.Println("invoking processNewPatient " + function)
 		bytes, err := services.ProcessNewPatient(args, stub)
@@ -49,14 +48,25 @@ func (self *PatientProcessingChainCode) Invoke(stub shim.ChaincodeStubInterface,
 		return bytes, nil
 	}
 
-	if function == "processOldPatient" {
-		fmt.Println("invoking processOldPatient " + function)
-		bytes, err := services.ProcessNewPatient(args, stub)
+	if function == "processItems" {
+		fmt.Println("invoking processItems" + function)
+		bytes, err := services.ProcessItems(args, stub)
 		if err != nil {
-			fmt.Println("Error performing processOldPatient function ")
+			fmt.Println("Error performing processItems function ")
 			return nil, err
 		}
-		fmt.Println("Old Patient Update successfully. ")
+		fmt.Println("Items Update successfully ")
+		return bytes, nil
+	}
+
+	if function == "processTransaction" {
+		fmt.Println("invoking ProcessTransaction" + function)
+		bytes, err := services.ProcessTransaction(args, stub)
+		if err != nil {
+			fmt.Println("Error performing processTransaction function ")
+			return nil, err
+		}
+		fmt.Println("Transaction Update successfully ")
 		return bytes, nil
 	}
 
